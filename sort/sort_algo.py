@@ -29,9 +29,11 @@ class sort_algo():
             self.selection_sort(self.arr, self.arr_len)
         elif self.sort_algo == 'bubble':
             self.bubble_sort(self.arr, self.arr_len)
+        elif self.sort_algo == 'insertion_sort':
+            self.insertion_sort(self.arr)
         end_time = time.time()
         time_consumption = end_time - begin_time
-        print('Sort: \nResult: {}\nTime consump: {}'.format(self.arr, time_consumption))
+        print('Sort result: {} \nResult: {}\nTime consump: {}'.format(self.sort_algo, self.arr, time_consumption))
 
     def selection_sort(self, arr, arr_len):
         """
@@ -65,3 +67,21 @@ class sort_algo():
                 if self.compare(arr[idx1], arr[idx2 + 1]):
                     # swap (a_i, a_i+1) -> (a_i+1, a_i) if true
                     arr[idx1], arr[idx2 + 1] = arr[idx2 + 1], arr[idx1]
+
+    def insertion_sort(self, arr):
+
+        for i in range(1, len(arr)):
+            # from the element 1, choose the current as the key
+            key = arr[i]
+
+            # from 0 to i - 1
+            j = i - 1
+
+            # iteratively traversal the arr
+            while j >= 0 and key < arr[j]:
+                # swap if the key is less than the element at index j
+                arr[j+1] = arr[j]
+                j -= 1
+
+            arr[j-1] = key
+
