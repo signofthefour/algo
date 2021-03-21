@@ -85,3 +85,39 @@ class sort_algo():
 
             arr[j-1] = key
 
+class QuickSort(sort_algo):
+    def swap(self, a, b):
+        if a > b:
+            return
+        self.arr[a], self.arr[b] = self.arr[b], self.arr[a]
+
+    def partition(self, l, r):
+        i = l+1; j = r;
+        pivot = self.arr[l];
+        # print(r)
+        while(i < j):
+            while self.arr[i] < pivot and i < j:
+                i+=1
+            if i == r:
+                break
+            while self.arr[j] > pivot and j > i:
+                j-=1
+            self.swap(i, j)
+            print(f"\tswap between: {self.arr[j]} and {self.arr[i]}")
+        print(f"swap pivot {pivot} with element at array[{j}] = {self.arr[j]}")
+        self.swap(l, i - 1)
+        return i
+    
+    def quicksort(self, l, r):
+        print(f"sort from {l} to {r}")
+        while l < r:
+            idx= self.partition(l, r)
+            print(f"array status: {self.arr}")
+            self.quicksort(l, l + idx)
+            self.quicksort(l + idx + 1, r)
+        print(f"====================")
+        return self.arr
+
+    def sort(self, ascendant=True):
+        arr = self.quicksort(0, len(self.arr) - 1)
+        return arr if ascendant else arr[::-1]
